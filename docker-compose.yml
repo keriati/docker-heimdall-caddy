@@ -1,0 +1,36 @@
+version: "2.1"
+
+volumes:
+  caddy_data: {}
+
+services:
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Vienna
+    volumes:
+      - ${APP_DIR}/config:/config
+    expose:
+      - 80
+    restart: unless-stopped
+
+  caddy:
+    image: slothcroissant/caddy-cloudflaredns:2.6.1
+    container_name: heimdall-caddy
+    ports:
+      - "2080:2080"
+    volumes:
+      - ${APP_DIR}/caddy:/etc/caddy
+      - caddy_data:/data
+    environment:
+      - ADMIN_USER=${ADMIN_USER:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-JDJhJDE0JE91S1FrN0Z0VEsyWmhrQVpON1VzdHVLSDkyWHdsN0xNbEZYdnNIZm1pb2d1blg4Y09mL0ZP}
+      - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL}
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
+      - HEIMDALL_DOMAIN=${HEIMDALL_DOMAIN}
+      - ACME_AGREE=true
+    restart: unless-stopped

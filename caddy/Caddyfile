@@ -1,0 +1,10 @@
+{
+    email {env.CLOUDFLARE_EMAIL}
+}
+
+{env.HEIMDALL_DOMAIN}:2080 {
+    tls {
+        dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+    }
+    reverse_proxy heimdall:80
+}
