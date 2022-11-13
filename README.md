@@ -1,6 +1,6 @@
-# Heimdall with Caddy
+# Heimdall with Caddy and MariaDB
 
-Use Heimdall with green https on your local network.
+Use Heimdall with green https on your local network with MariaDB.
 
 Requirements
  - Own domain
@@ -13,3 +13,7 @@ Environment variables:
  - CLOUDFLARE_EMAIL
  - CLOUDFLARE_API_TOKEN
  - HEIMDALL_DOMAIN
+ - MYSQL_ROOT_PW
+ - MYSQL_DB
+ - MYSQL_USER
+ - MYSQL_PASSWORD

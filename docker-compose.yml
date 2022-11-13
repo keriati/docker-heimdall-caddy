@@ -2,6 +2,7 @@ version: "2.1"
 
 volumes:
   caddy_data: {}
+  mariadb_data: {}
 
 services:
   heimdall:
@@ -15,6 +16,26 @@ services:
       - ${APP_DIR}/config:/config
     expose:
       - 80
+    restart: unless-stopped
+
+  mariadb:
+    image: lscr.io/linuxserver/mariadb:latest
+    container_name: mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PW}
+      - TZ=Europe/London
+      - MYSQL_DATABASE=${MYSQL_DB}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+#      - REMOTE_SQL=http://URL1/your.sql,https://URL2/your.sql #optional
+    volumes:
+      - mariadb_data:/config
+    ports:
+      - "33306:3306"
+    expose:
+      - 3306
     restart: unless-stopped
 
   caddy:
