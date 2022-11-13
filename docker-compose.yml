@@ -5,7 +5,7 @@ volumes:
 
 services:
   heimdall:
-    image: lscr.io/linuxserver/heimdall:2.4.14
+    image: lscr.io/linuxserver/heimdall:development
     container_name: heimdall
     environment:
       - PUID=1000
@@ -26,9 +26,6 @@ services:
       - ${APP_DIR}/caddy:/etc/caddy
       - caddy_data:/data
     environment:
-      - ADMIN_USER=${ADMIN_USER:-admin}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-JDJhJDE0JE91S1FrN0Z0VEsyWmhrQVpON1VzdHVLSDkyWHdsN0xNbEZYdnNIZm1pb2d1blg4Y09mL0ZP}
       - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL}
       - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
       - HEIMDALL_DOMAIN=${HEIMDALL_DOMAIN}
