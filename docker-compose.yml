@@ -6,7 +6,7 @@ volumes:
 
 services:
   heimdall:
-    image: lscr.io/linuxserver/heimdall:development
+    image: lscr.io/linuxserver/heimdall:2.4.15
     container_name: heimdall
     environment:
       - PUID=1000
