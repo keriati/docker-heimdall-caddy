@@ -39,7 +39,7 @@ services:
     restart: unless-stopped
 
   caddy:
-    image: slothcroissant/caddy-cloudflaredns:2.6.1
+    image: slothcroissant/caddy-cloudflaredns:2.6.4
     container_name: heimdall-caddy
     ports:
       - "2080:2080"
